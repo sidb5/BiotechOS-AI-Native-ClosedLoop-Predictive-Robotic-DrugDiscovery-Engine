@@ -164,7 +164,7 @@ BiotechOS replaces all of that with a single connected system:
 
 - Biotech companies submit research goals in natural language. The platform parses them, asks clarifying questions via a streaming AI chat, generates experiment plans, builds assay packages, and routes them to the right CRO lab — automatically.
 - CRO labs receive structured dispatch jobs, accept or negotiate, execute runs, log QC flags, and upload results — all within the platform.
-- Claude AI runs continuously in the background: ranking candidate molecules, scoring toxicity, assessing PK feasibility, generating next-experiment recommendations, and proposing entirely new compounds via fragment-based design.
+- AI runs continuously in the background: ranking candidate molecules, scoring toxicity, assessing PK feasibility, generating next-experiment recommendations, and proposing entirely new compounds via fragment-based design.
 
 The result is a closed-loop system where every experiment informs the next, every decision is traceable, and the gap between hypothesis and data shrinks from weeks to days.
 
@@ -211,12 +211,12 @@ The AI core. Every computationally expensive inference runs as an Inngest job wi
 
 | Module | What it does |
 |---|---|
-| `candidate-ranking` | Ranks uploaded molecules by predicted efficacy using Claude AI. Produces scored `RankingResult` records with confidence intervals and dose window estimates. |
+| `candidate-ranking` | Ranks uploaded molecules by predicted efficacy using AI. Produces scored `RankingResult` records with confidence intervals and dose window estimates. |
 | `toxicity-scoring` | Screens candidates for hERG channel risk, hepatotoxicity markers, off-target liability, and mutagenicity potential. |
 | `pk-feasibility` | Assesses bioavailability, half-life, and oral dosability. Returns `feasible / borderline / infeasible` with reasoning. |
 | `rescue-scoring` | After wet-lab results return, compares predicted vs actual efficacy and proposes which failed candidates are worth rescuing with structural modifications. |
 | `next-experiment` | Given a completed result bundle, reasons over prior runs, open hypotheses, and remaining budget to recommend the highest-value next assay. |
-| `molecule-design` | Fragment-based generative design via Claude. Produces novel SMILES strings with named scaffolds, mechanism annotations, and immediate toxicity pre-screening. |
+| `molecule-design` | Fragment-based generative design via AI. Produces novel SMILES strings with named scaffolds, mechanism annotations, and immediate toxicity pre-screening. |
 | `experiment-scoring` | Scores experiment plans against scientific objectives before execution is approved. |
 | `cross-program` | Scans insights across all active projects to surface cross-program learnings (e.g. a scaffold pattern that is appearing as a liability across multiple disease areas). |
 | `embeddings` | Generates molecular and textual embeddings for similarity search and retrieval-augmented decision support. |
@@ -417,7 +417,7 @@ Compound identity (SMILES, name, structure), mechanism of action, and disease in
 | Database | Supabase (PostgreSQL) | RLS, realtime, Auth, Storage — no ORM needed |
 | Styling | Tailwind CSS | Consistent dark-mode UI with zero runtime overhead |
 | Async jobs | Inngest | Durable step execution, retries, cron, fan-out |
-| AI inference | Anthropic Claude API | Molecule design, ranking explanation, clarification chat |
+| AI inference | Anthropic AI API | Molecule design, ranking explanation, clarification chat |
 | File storage | Supabase Storage | Structure files, document packets, assay reports |
 
 ---
@@ -456,8 +456,8 @@ Role-based access is enforced at both the RLS layer (database) and the UI routin
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/sidb5/BiotechOS-Claude-DrugDiscovery
-cd BiotechOS-Claude-DrugDiscovery/biotechos
+git clone https://github.com/sidb5/BiotechOS-DrugDiscovery
+cd BiotechOS-DrugDiscovery/biotechos
 npm install
 ```
 
